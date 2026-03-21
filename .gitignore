@@ -1,0 +1,21 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+build/
+
+# Variáveis de ambiente — nunca comitar chaves reais
+.env*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Sistema
+.DS_Store
+Thumbs.db
