@@ -1,5 +1,5 @@
 import Fastify from "fastify";
-import { buildGraph } from "./graph/graph";
+import { buildGraph } from "./graph/graph.ts";
 import { HumanMessage } from "langchain";
 
 const graph = buildGraph()
@@ -24,7 +24,7 @@ export const createServer = () => {
             const response = await graph.invoke({
                 messages: [new HumanMessage(question)]
             })
-            return reply.send(response.output)
+            return reply.send(response.output) //TODO PARAMOS AQUI. Video 02 14:56
         } catch (error) {
             console.error('Error handling /chat request:', error)
             return reply.code(500)
