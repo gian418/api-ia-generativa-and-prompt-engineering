@@ -43,8 +43,6 @@ export const config: ModelConfig = {
   httpReferer: '',
   xTitle: 'IA Devs - Guardrails'!,
   models: [
-    // 'qwen/qwen-2.5-7b-instruct',
-    // 'qwen/qwen3-coder-next',
     // 'upstage/solar-pro-3:free',
     'qwen/qwen-2.5-7b-instruct',// unsafe!
   ],

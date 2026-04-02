@@ -4,15 +4,21 @@ import type { GraphState } from '../state.ts';
 export const createGuardrailsCheckNode = (openRouterService: OpenRouterService) => {
     return async (state: GraphState): Promise<Partial<GraphState>> => {
         try {
+            const lastMessage = state.messages.at(-1)?.text ?? ""
 
             return {
-                ...state,
+                guardrailCheck: {
+                    safe: true,
+                }
             };
         } catch (error) {
             console.error('Guardrails check failed:', error);
 
             return {
-                ...state,
+                guardrailCheck: {
+                    reason: 'Guardrails service unvailable - request blocked for safety',
+                    safe: false,
+                }
             };
         }
     }
