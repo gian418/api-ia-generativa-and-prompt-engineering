@@ -2,11 +2,19 @@ import type { GraphState } from '../state.ts';
 import { AIMessage } from '@langchain/core/messages';
 import { OpenRouterService } from '../../services/openrouterService.ts';
 import { PromptTemplate } from '@langchain/core/prompts';
-import { prompts } from '../../config.ts';
+import { getUser, prompts } from '../../config.ts';
+import { stat } from 'fs';
 
 export const createChatNode = (openRouterService: OpenRouterService) => {
     return async (state: GraphState): Promise<Partial<GraphState>> => {
         try {
+
+            // only for LangSmith Studio = set defaults it not present
+            if(!state.user) {
+                state.user = getUser('erickwendel')!
+                state.guardrailsEnabled = true
+            }
+
             const userPrompt = state.messages.at(-1)?.text!
             const template = PromptTemplate.fromTemplate(prompts.system)
             const systemPrompt = await template.format({
